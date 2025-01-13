@@ -1,3 +1,4 @@
+const path = require('node:path')
 /**
  * app : dùng để kiểm soát vòng đời sự kiện của ứng dụng
  * BrowserWindow : dùng để tạo, quản lý các cửa sổ ứng dụng
@@ -8,8 +9,14 @@ const { app, BrowserWindow } = require('electron/main')
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    // đặt đường dẫn file preload
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    }
   })
+
+  
 
   win.loadFile('index.html')
 }
